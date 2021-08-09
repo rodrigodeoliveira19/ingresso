@@ -3,8 +3,7 @@ package br.com.zup.rodrigo.service.imp
 import br.com.zup.rodrigo.model.Ingresso
 import br.com.zup.rodrigo.repository.IngressoRepository
 import br.com.zup.rodrigo.service.IngressoService
-import org.hibernate.ObjectNotFoundException
-import java.lang.RuntimeException
+import br.com.zup.rodrigo.shared.IngressoNaoEncontradoException
 import java.util.*
 import javax.inject.Singleton
 
@@ -37,7 +36,7 @@ class IngressoServiceImp(private val ingressoRepository: IngressoRepository) : I
     private  fun buscarIngressoPorId(id: String) : Optional<Ingresso>{
         val ingressoOptional = ingressoRepository.findById(UUID.fromString(id))
         if(ingressoOptional.isEmpty){
-            throw RuntimeException("Ingresso não encontrado")
+            throw IngressoNaoEncontradoException("Ingresso não encontrado")
         }
 
         return ingressoOptional
