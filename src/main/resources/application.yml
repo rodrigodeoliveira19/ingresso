@@ -17,3 +17,30 @@ endpoints:
     enabled: true
     sensitive: false
     details-visible: ANONYMOUS
+
+#Cassandra
+
+cassandra:
+  default:
+    basic:
+      contact-points:
+        - ${cassandra_contact_points:localhost}
+      session-keyspace: ${cassandra_session_keyspace:some-scylla}
+      load-balancing-policy:
+        local-datacenter: ${cassandra_local_datacenter:datacenter1}
+
+#Verificar o erro ao habilitar health
+endpoints.health.cassandra.enabled: false
+
+#cassandra:
+#  default:
+#    advanced:
+#      metadata:
+#        schema:
+#          enabled: false
+#    basic:
+#      contact-points:
+#        - "127.0.0.1:9042"
+#        - "127.0.0.2:8042"
+#      load-balancing-policy:
+#       local-datacenter: datacenter1

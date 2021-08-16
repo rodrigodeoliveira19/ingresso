@@ -7,8 +7,9 @@ import br.com.zup.rodrigo.shared.IngressoNaoEncontradoException
 import java.util.*
 import javax.inject.Singleton
 
-@Singleton
-class IngressoServiceImp(private val ingressoRepository: IngressoRepository) : IngressoService {
+//@Singleton
+class IngressoServiceImp(
+    private val ingressoRepository: IngressoRepository) : IngressoService {
 
     override fun cadastrar(ingresso: Ingresso): Ingresso {
         return ingressoRepository.save(ingresso)
@@ -33,9 +34,9 @@ class IngressoServiceImp(private val ingressoRepository: IngressoRepository) : I
         ingressoRepository.delete(ingresso)
     }
 
-    private  fun buscarIngressoPorId(id: String) : Optional<Ingresso>{
+    private fun buscarIngressoPorId(id: String): Optional<Ingresso> {
         val ingressoOptional = ingressoRepository.findById(UUID.fromString(id))
-        if(ingressoOptional.isEmpty){
+        if (ingressoOptional.isEmpty) {
             throw IngressoNaoEncontradoException("Ingresso não encontrado")
         }
 
