@@ -12,17 +12,16 @@ import javax.validation.constraints.Positive
 
 @Entity
 class Ingresso(
+    @field:Id
+    @field: GeneratedValue
+    val id: UUID? = null, 
     @field: NotBlank var descricao: String,
     @field: Positive var valor: BigDecimal,
     @field: NotBlank var endereco: String,
     var dataEvento: LocalDate
 ) {
 
-    @field:Id
-    @field: GeneratedValue
-    val id: UUID? = null
-
-    fun atualizar(ingresso: Ingresso){
+    fun atualizar(ingresso: Ingresso) {
         descricao = ingresso.descricao
         valor = ingresso.valor
         endereco = ingresso.endereco

@@ -20,7 +20,10 @@ class IngressoRequest(
 
     fun ToModel(): Ingresso {
         return Ingresso(
-            descricao,valor, endereco, dataEvento
+            descricao = descricao,
+            valor = valor,
+            endereco = endereco,
+            dataEvento =dataEvento
         )
     }
 

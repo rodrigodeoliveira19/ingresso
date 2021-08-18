@@ -11,7 +11,7 @@ import javax.validation.Valid
 
 @Validated
 @Controller("/ingressos")
-class IngressoController(private val ingressoService: IngressoService) {
+class IngressoController(private val ingressoService: IngressoService ) {
 
     @Post
     @Transactional
@@ -31,12 +31,11 @@ class IngressoController(private val ingressoService: IngressoService) {
     @Get("/{id}")
     @Transactional
     fun buscarPorId(@PathVariable id: String) : HttpResponse<IngressoResponse>{
-        val ingressoOptional = ingressoService.buscarPorId(id)
-        if(ingressoOptional.isEmpty){
+        val ingresso = ingressoService.buscarPorId(id)
+        if(ingresso == null){
             return  HttpResponse.notFound()
         }
 
-        val ingresso = ingressoOptional.get()
         return  HttpResponse.ok(IngressoResponse(ingresso))
     }
 
@@ -48,7 +47,6 @@ class IngressoController(private val ingressoService: IngressoService) {
         val ingresso = ingressoRequest.ToModel()
         ingressoService.atualizar(id, ingresso)
         return HttpResponse.ok(IngressoResponse(ingresso))
-
     }
 
     @Delete("/{id}")

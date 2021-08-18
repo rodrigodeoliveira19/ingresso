@@ -25,7 +25,7 @@ cassandra:
     basic:
       contact-points:
         - ${cassandra_contact_points:localhost}
-      session-keyspace: ${cassandra_session_keyspace:some-scylla}
+      session-keyspace: "mykeyspace"
       load-balancing-policy:
         local-datacenter: ${cassandra_local_datacenter:datacenter1}
 
@@ -44,3 +44,7 @@ endpoints.health.cassandra.enabled: false
 #        - "127.0.0.2:8042"
 #      load-balancing-policy:
 #       local-datacenter: datacenter1
+
+
+# - ${cassandra_contact_points:localhost}
+# session-keyspace: ${cassandra_session_keyspace:}
