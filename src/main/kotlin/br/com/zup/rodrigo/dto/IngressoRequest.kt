@@ -23,7 +23,7 @@ class IngressoRequest(
             descricao = descricao,
             valor = valor,
             endereco = endereco,
-            dataEvento =dataEvento
+            dataEvento = dataEvento
         )
     }
 

@@ -11,38 +11,38 @@ import javax.validation.Valid
 
 @Validated
 @Controller("/ingressos")
-class IngressoController(private val ingressoService: IngressoService ) {
+class IngressoController(private val ingressoService: IngressoService) {
 
     @Post
     @Transactional
     fun cadastrar(@Body @Valid ingressoRequest: IngressoRequest): HttpResponse<Any> {
-        val ingresso =  ingressoRequest.ToModel()
+        val ingresso = ingressoRequest.ToModel()
         return HttpResponse.created(ingressoService.cadastrar(ingresso))
     }
 
     @Get
     @Transactional
-    fun buscarTodos() : HttpResponse<List<IngressoResponse>>{
+    fun buscarTodos(): HttpResponse<List<IngressoResponse>> {
         val ingressos = ingressoService.buscarTodos()
         val ingressosResponse = ingressos.map { ingresso -> IngressoResponse(ingresso) }
-        return  HttpResponse.ok(ingressosResponse)
+        return HttpResponse.ok(ingressosResponse)
     }
 
     @Get("/{id}")
     @Transactional
-    fun buscarPorId(@PathVariable id: String) : HttpResponse<IngressoResponse>{
+    fun buscarPorId(@PathVariable id: String): HttpResponse<IngressoResponse> {
         val ingresso = ingressoService.buscarPorId(id)
-        if(ingresso == null){
-            return  HttpResponse.notFound()
+        if (ingresso == null) {
+            return HttpResponse.notFound()
         }
 
-        return  HttpResponse.ok(IngressoResponse(ingresso))
+        return HttpResponse.ok(IngressoResponse(ingresso))
     }
 
     @Put("/{id}")
     @Transactional
-    fun atualizar(@PathVariable id: String,@Body @Valid ingressoRequest: IngressoRequest)
-        : HttpResponse<IngressoResponse>{
+    fun atualizar(@PathVariable id: String, @Body @Valid ingressoRequest: IngressoRequest)
+            : HttpResponse<IngressoResponse> {
 
         val ingresso = ingressoRequest.ToModel()
         ingressoService.atualizar(id, ingresso)
@@ -51,8 +51,8 @@ class IngressoController(private val ingressoService: IngressoService ) {
 
     @Delete("/{id}")
     @Transactional
-    fun deletar(@PathVariable id: String) : HttpResponse<Unit>{
+    fun deletar(@PathVariable id: String): HttpResponse<Unit> {
         ingressoService.deletar(id)
-        return  HttpResponse.noContent()
+        return HttpResponse.noContent()
     }
 }

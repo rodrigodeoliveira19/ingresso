@@ -14,7 +14,7 @@ import javax.validation.constraints.Positive
 class Ingresso(
     @field:Id
     @field: GeneratedValue
-    val id: UUID? = null, 
+    val id: UUID? = null,
     @field: NotBlank var descricao: String,
     @field: Positive var valor: BigDecimal,
     @field: NotBlank var endereco: String,
