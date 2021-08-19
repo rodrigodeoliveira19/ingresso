@@ -1,7 +1,6 @@
 package br.com.zup.rodrigo.dto
 
 import br.com.zup.rodrigo.model.Ingresso
-import com.fasterxml.jackson.annotation.JsonFormat
 import io.micronaut.core.annotation.Introspected
 import io.micronaut.core.convert.format.Format
 import java.math.BigDecimal

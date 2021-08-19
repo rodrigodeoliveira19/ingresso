@@ -6,7 +6,6 @@ import br.com.zup.rodrigo.service.IngressoService
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
 import io.micronaut.validation.Validated
-import javax.transaction.Transactional
 import javax.validation.Valid
 
 @Validated
@@ -14,14 +13,12 @@ import javax.validation.Valid
 class IngressoController(private val ingressoService: IngressoService) {
 
     @Post
-    @Transactional
     fun cadastrar(@Body @Valid ingressoRequest: IngressoRequest): HttpResponse<Any> {
         val ingresso = ingressoRequest.ToModel()
         return HttpResponse.created(ingressoService.cadastrar(ingresso))
     }
 
     @Get
-    @Transactional
     fun buscarTodos(): HttpResponse<List<IngressoResponse>> {
         val ingressos = ingressoService.buscarTodos()
         val ingressosResponse = ingressos.map { ingresso -> IngressoResponse(ingresso) }
@@ -29,7 +26,6 @@ class IngressoController(private val ingressoService: IngressoService) {
     }
 
     @Get("/{id}")
-    @Transactional
     fun buscarPorId(@PathVariable id: String): HttpResponse<IngressoResponse> {
         val ingresso = ingressoService.buscarPorId(id)
         if (ingresso == null) {
@@ -40,7 +36,6 @@ class IngressoController(private val ingressoService: IngressoService) {
     }
 
     @Put("/{id}")
-    @Transactional
     fun atualizar(@PathVariable id: String, @Body @Valid ingressoRequest: IngressoRequest)
             : HttpResponse<IngressoResponse> {
 
@@ -50,7 +45,6 @@ class IngressoController(private val ingressoService: IngressoService) {
     }
 
     @Delete("/{id}")
-    @Transactional
     fun deletar(@PathVariable id: String): HttpResponse<Unit> {
         ingressoService.deletar(id)
         return HttpResponse.noContent()
